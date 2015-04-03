@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ *******************************************************************
+ * @category   Belvg
+ * @package    Belvg_Ajaxloader
+ * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+-->
+<layout version="0.1.0">
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addItem"><type>js_css</type><name>belvg/jqueryext/colorpicker/css/colorpicker.css</name></action>
+        </reference>
+        <reference name="jquery_head">
+            <action method="addLib"><libname>jquery</libname></action>
+            <action method="addLib"><libname>noconflict</libname></action>
+            <action method="addJs"><script>belvg/jqueryext/colorpicker/js/colorpicker.js</script></action>
+            <action method="addJs"><script>belvg/jqueryext/colorpicker/js/eye.js</script></action>
+            <action method="addJs"><script>belvg/jqueryext/colorpicker/js/utils.js</script></action>
+            <action method="addJs"><script>belvg/jqueryext/colorpicker/js/layout.js?ver=1.0.2</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="ajaxloader.admin.config" template="belvg/ajaxloader/config_block.phtml"/>
+        </reference>
+    </adminhtml_system_config_edit>   
+</layout>

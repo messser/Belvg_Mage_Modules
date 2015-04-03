@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ *******************************************************************
+ * @category   Belvg
+ * @package    Belvg_Ajaxloader
+ * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+-->
+<config>
+    <modules>
+        <Belvg_Ajaxloader>
+            <version>0.9.0</version>
+            <update>04-12-2014</update>
+            <desc>Stock Version</desc>
+        </Belvg_Ajaxloader>
+    </modules>
+    <global>
+        <models>
+            <ajaxloader>
+                <class>Belvg_Ajaxloader_Model</class>
+                <resourceModel>ajaxloader_resource</resourceModel>
+            </ajaxloader>
+            <ajaxloader_resource>
+                <class>Belvg_Ajaxloader_Model_Resource</class>
+                <entities>
+                    <product>
+                        <table>belvg_ajaxloader_product</table>
+                    </product>
+                    <attribute>
+                        <table>belvg_ajaxloader_attribute</table>
+                    </attribute>
+                    <loader>
+                        <table>belvg_ajaxloader_loader</table>
+                    </loader>
+                </entities>
+            </ajaxloader_resource>
+        </models>
+        <resources>
+            <ajaxloader_setup>
+                <setup>
+                    <module>Belvg_Ajaxloader</module>
+                </setup>
+            </ajaxloader_setup>
+        </resources>
+        <blocks>
+            <ajaxloader>
+                <class>Belvg_Ajaxloader_Block</class>
+            </ajaxloader>
+        </blocks>
+        <helpers>
+            <ajaxloader>
+                <class>Belvg_Ajaxloader_Helper</class>
+            </ajaxloader>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <ajaxloader>
+                    <file>belvg/ajaxloader.xml</file>
+                </ajaxloader>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Belvg_Ajaxloader after="Mage_Adminhtml">Belvg_Ajaxloader_Adminhtml</Belvg_Ajaxloader>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <ajaxloader>
+                    <file>belvg/ajaxloader.xml</file>
+                </ajaxloader>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <ajaxloader>
+            <settings>
+                <enabled>0</enabled>
+                <onload>1</onload>
+                <animation_speed>800</animation_speed>
+                <cursor_loader_enabled>1</cursor_loader_enabled>
+                <cursor_loader_image>default/ajax-loader.gif</cursor_loader_image>
+                <overlay_enabled>1</overlay_enabled>
+                <overlay_opacity>0.6</overlay_opacity>
+                <overlay_color>ffffff</overlay_color>
+                <overlay_element>.main-container</overlay_element>
+                <main_loader_enabled>1</main_loader_enabled>
+                <main_loader_image>default/loader.gif</main_loader_image>
+                <main_loader_opacity>0.2</main_loader_opacity>
+            </settings>
+        </ajaxloader>
+    </default>
+    <jquery>
+        <compatibility>
+            <Belvg_Ajaxloader>
+                <v1_8_3/>
+                <v1_9_0/>
+                <v1_9_1/>
+                <v2_0_2/>
+                <v2_0_3/>
+            </Belvg_Ajaxloader>
+        </compatibility>
+    </jquery>
+</config>

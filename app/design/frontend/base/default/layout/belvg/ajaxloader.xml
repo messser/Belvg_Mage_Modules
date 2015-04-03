@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ *******************************************************************
+ * @category   Belvg
+ * @package    Belvg_Ajaxloader
+ * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/belvg/ajaxloader.css</stylesheet></action>
+        </reference>
+        <reference name="jquery_head">
+            <action method="addLib" ifconfig="ajaxloader/settings/enabled" ifvalue="1"><libname>jquery</libname></action>
+            <action method="addLib" ifconfig="ajaxloader/settings/enabled" ifvalue="1"><libname>noconflict</libname></action>
+            <action method="addJs" ifconfig="ajaxloader/settings/enabled" ifvalue="1"><script>belvg/ajaxloader/ajaxloader.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="ajaxloader/front" name="ajaxloader.block" template="belvg/ajaxloader/block.phtml"/>
+        </reference>        
+    </default>
+</layout>            
