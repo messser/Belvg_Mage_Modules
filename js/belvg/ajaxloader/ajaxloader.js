@@ -27,10 +27,15 @@
         };
         imgLoader.src = settings.loader;*/
         
-        if(settings.bind_to_ajax)
-            jQuery(document).ajaxStart(function(){ $.prettyLoader.show() }).ajaxStop(function(){ $.prettyLoader.hide() });
+        if (settings.bind_to_ajax) {
+            jQuery(document).ajaxStart(function() {
+                $.prettyLoader.show();
+            }).ajaxStop(function() {
+                $.prettyLoader.hide();
+            });
+        }
         
-        $.prettyLoader.positionLoader = function(e){
+        $.prettyLoader.positionLoader = function(e) {
             e = e ? e : window.event;
             
             // Set the cursor pos only if the even is returned by the browser.
@@ -38,7 +43,7 @@
             cur_y = (e.clientY) ? e.clientY : cur_y;
             
             left_pos = cur_x + settings.offset_left + scrollPos['scrollLeft'];
-            top_pos = cur_y + settings.offset_top + scrollPos['scrollTop'];
+            top_pos  = cur_y + settings.offset_top + scrollPos['scrollTop'];
             
             $('.prettyLoader').css({
                 'top':top_pos,
@@ -46,8 +51,8 @@
             });
         }
         
-        $.prettyLoader.show = function(delay){
-            if($('.prettyLoader').size() > 0) return;
+        $.prettyLoader.show = function(delay) {
+            if ($('.prettyLoader').size() > 0) return;
             
             // Get the scroll position
             scrollPos = _getScroll();
@@ -55,13 +60,14 @@
             // Build the loader container
             $('<div></div>')
                 .addClass('prettyLoader')
-                .addClass('prettyLoader_'+ settings.theme)
+                .addClass('prettyLoader_' + settings.theme)
                 .appendTo('body')
                 .hide();
             
             // No png for IE6...sadly :(
-            if($.browser.msie && $.browser.version == 6)
+            if ($.browser.msie && $.browser.version == 6) {
                 $('.prettyLoader').addClass('pl_ie6');
+            }
             
             // Build the loader image
             /*$('<img />')
@@ -73,16 +79,19 @@
             
             $(document).bind('click',$.prettyLoader.positionLoader);
             $(document).bind('mousemove',$.prettyLoader.positionLoader);
-            $(window).scroll(function(){ scrollPos = _getScroll(); $(document).triggerHandler('mousemove'); });
+            $(window).scroll(function() {
+                scrollPos = _getScroll();
+                $(document).triggerHandler('mousemove');
+            });
             
             delay = (delay) ? delay : settings.delay;
             
-            if(delay){
+            if (delay) {
                 setTimeout(function(){ $.prettyLoader.hide() }, delay);
             }
         };
         
-        $.prettyLoader.hide = function(){
+        $.prettyLoader.hide = function() {
             $(document).unbind('click',$.prettyLoader.positionLoader);
             $(document).unbind('mousemove',$.prettyLoader.positionLoader);
             $(window).unbind('scroll');
@@ -92,7 +101,8 @@
             });
         };
         
-        function _getScroll(){
+        function _getScroll()
+        {
             if (self.pageYOffset) {
                 return {scrollTop:self.pageYOffset,scrollLeft:self.pageXOffset};
             } else if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
@@ -106,7 +116,6 @@
     };
 
 })(jQuery);
-jQblvg.prettyLoader();
 
 var Ajaxloader = {
     disabled : false,
@@ -116,7 +125,8 @@ var Ajaxloader = {
     overlayLoader: null,
     overlayLoaderOpacity: 0.6,
     animationSpeed: 800,
-    isDisabled : function() {
+    isDisabled : function()
+    {
         if (this.disabled == true) {
             this.disabled = false;
             return true;
@@ -124,79 +134,96 @@ var Ajaxloader = {
         
         return false;
     },
-    disable : function() {
+    disable : function()
+    {
         this.disabled = true;
     },
-    setOverlaySettings: function(color, opacity, element, loader, loader_opacity) {
-        this.overlayColor = color?color:this.overlayColor;
+    setOverlaySettings: function(color, opacity, element, loader, loader_opacity)
+    {
+        this.overlayColor   = color ? color : this.overlayColor;
         this.overlayOpacity = opacity?opacity:this.overlayOpacity;
         this.overlayElement = element?element:this.overlayElement;
-        this.overlayLoader = loader?loader:this.overlayLoader;
+        this.overlayLoader  = loader?loader:this.overlayLoader;
         this.overlayLoaderOpacity = loader_opacity?loader_opacity:this.overlayLoaderOpacity;
+        
         return this;
     },
-    setOverlayElement : function(element) {
-        this.overlayElement = element?element:this.overlayElement;
+    setOverlayElement : function(element)
+    {
+        this.overlayElement = element ? element : this.overlayElement;
+        
         return this;
     },
-    setAnimationSpeed : function(speed) {
+    setAnimationSpeed : function(speed)
+    {
         this.animationSpeed = parseInt(speed);
+        
         return this;
     },
-    showCursorLoader : function() {
-        jQblvg.prettyLoader.show();
+    showCursorLoader : function()
+    {
+        jQuery.prettyLoader.show();
+        
         return this;
     },
-    hideCursorLoader : function() {
-        jQblvg.prettyLoader.hide();
+    hideCursorLoader : function()
+    {
+        jQuery.prettyLoader.hide();
+        
         return this;
     },
-    activateOverlay : function() {
+    activateOverlay : function()
+    {
         if (this.overlayColor) {
-            background = this.overlayColor;
-            jQblvg('.page').append('<div class="belvg-main-overlay"></div>');
-            jQblvg('.belvg-main-overlay').css({
-                'position':'absolute',
-                'opacity':0,
-                'z-index':29999,
-                'background': background,
-                'width': jQblvg(this.overlayElement).outerWidth(true)+'px',
-                'height': jQblvg(this.overlayElement).outerHeight(true)+'px',
-                'left': jQblvg(this.overlayElement).offset().left+'px',
-                'top': jQblvg(this.overlayElement).offset().top+'px'
-            }).animate({'opacity':this.overlayOpacity}, this.animationSpeed);
+            var element = jQuery(this.overlayElement);
+            element.append('<div class="belvg-main-overlay"></div>');
+            var overlay = jQuery('.belvg-main-overlay');
+            overlay.css({
+                'position'  : 'absolute',
+                'opacity'   : 0,
+                'z-index'   : 29999,
+                'background': this.overlayColor,
+                'width'     : element.outerWidth(true) + 'px',
+                'height'    : element.outerHeight(true) + 'px',
+                'left'      : element.position().left + 'px',
+                'top'       : element.position().top + 'px'
+            }).stop().animate({'opacity':this.overlayOpacity}, this.animationSpeed);
         }
-    
+        
         return this;    
     },
-    disableOverlay : function()  {
-        jQblvg('.belvg-main-overlay').animate({'opacity':0}, this.animationSpeed, function() {
-            jQblvg('.belvg-main-overlay').remove();
+    disableOverlay : function()
+    {
+        var overlay = jQuery('.belvg-main-overlay');
+        overlay.stop().animate({'opacity':0}, this.animationSpeed, function() {
+            overlay.remove();
         });
         
         return this;
     },
-    showMainLoader : function() {
+    showMainLoader : function()
+    {
         if (this.overlayLoader) {
-            jQblvg('body').append('<div class="belvg-main-loader"></div>');
+            jQuery('body').append('<div class="belvg-main-loader"></div>');
             background = 'url('+this.overlayLoader+') center center no-repeat transparent';
-            jQblvg('.belvg-main-loader').css({
+            jQuery('.belvg-main-loader').css({
                 'position':'fixed',
                 'opacity':0,
                 'z-index':29999,
                 'background': background,
-                'width': jQblvg(window).outerWidth(true)+'px',
-                'height': jQblvg(window).outerHeight(true)+'px',
+                'width': jQuery(window).outerWidth(true)+'px',
+                'height': jQuery(window).outerHeight(true)+'px',
                 'left': '0',
                 'top': '0'
-            }).animate({'opacity':this.overlayLoaderOpacity}, this.animationSpeed);
+            }).stop().animate({'opacity':this.overlayLoaderOpacity}, this.animationSpeed);
         }
         
         return this;
     },
-    hideMainLoader : function()  {
-        jQblvg('.belvg-main-loader').animate({'opacity':0}, this.animationSpeed, function() {
-            jQblvg('.belvg-main-loader').remove();
+    hideMainLoader : function()
+    {
+        jQuery('.belvg-main-loader').stop().animate({'opacity':0}, this.animationSpeed, function() {
+            jQuery('.belvg-main-loader').remove();
         });
         
         return this;

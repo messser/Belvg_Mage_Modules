@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * BelVG LLC.
  *
  * NOTICE OF LICENSE
@@ -12,18 +12,19 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
  */
 class Belvg_Ajaxloader_Block_Adminhtml_Config_Info extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
+    
     const MODULE_NAME = 'Belvg_Ajaxloader';
     
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
         $helper = Mage::helper('ajaxloader');
-        $id = $element->getHtmlId();
-        $html = '<tr id="row_' . $id . '">';
+        $id     = $element->getHtmlId();
+        $html   = '<tr id="row_' . $id . '">';
         $html .= '<td class="label" colspan="1">' . $helper->__('Module Version') . '</td><td class="value" colspan="4">' . $this->getModuleVersion() . '</td>';
         $html .= '</tr>';
         if ($tmp = $this->getModuleUpdate()) {
@@ -43,17 +44,17 @@ class Belvg_Ajaxloader_Block_Adminhtml_Config_Info extends Mage_Adminhtml_Block_
     
     public function getModuleVersion()
     {
-        return (string)Mage::getConfig()->getNode('modules/' . self::MODULE_NAME . '/version');
+        return (string) Mage::getConfig()->getNode('modules/' . self::MODULE_NAME . '/version');
     }
     
     public function getModuleUpdate()
     {
-        return (string)Mage::getConfig()->getNode('modules/' . self::MODULE_NAME . '/update');
+        return (string) Mage::getConfig()->getNode('modules/' . self::MODULE_NAME . '/update');
     }
     
     public function getModuleDesc()
     {
-        return (string)Mage::getConfig()->getNode('modules/' . self::MODULE_NAME . '/desc');
+        return (string) Mage::getConfig()->getNode('modules/' . self::MODULE_NAME . '/desc');
     }
     
 }

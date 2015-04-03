@@ -1,48 +1,8 @@
-<?php
-/**
- * BelVG LLC.
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the EULA
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
- *
- *******************************************************************
- * @category   Belvg
- * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
- * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
--->
- */
-$section = $this->getRequest()->getParam('section') ?>
+<?php $section = $this->getRequest()->getParam('section') ?>
 <?php if ($section == 'ajaxloader'): ?>
-<script language="JavaScript" type="text/javascript">
-jQblvg(document).ready(function(){
-    var el_colors = jQblvg('#ajaxloader_settings_overlay_color');
-    el_colors.each( function(){
-        el_color = jQblvg(this);
-        el_color.attr('readonly','readonly');
-        if(el_color && el_color.val()!='') {
-            el_color.css('background','#'+el_color.val());
-        }
-        el_color.ColorPicker({
-            onSubmit: function(hsb, hex, rgb, el){
-                jQblvg(el).val(hex);
-                jQblvg(el).ColorPickerHide();
-            },
-            onBeforeShow: function(){
-                jQblvg(this).ColorPickerSetColor(this.value);
-            },
-            onChange: function(hsb, hex, rgb){
-                el_color.val(hex);
-                el_color.css('background','#'+hex);
-            }
-        }).bind('keyup', function(){
-            jQblvg(this).ColorPickerSetColor(this.value);
+    <script>
+        Event.observe(window, 'load', function() {
+            var loaderOverlayColor  = new jscolor.color($('ajaxloader_settings_overlay_color'), {hash:true});
         });
-    });
-});
-</script>
+    </script>
 <?php endif ?>

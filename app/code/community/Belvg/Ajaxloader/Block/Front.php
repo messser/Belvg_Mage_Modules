@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * BelVG LLC.
  *
  * NOTICE OF LICENSE
@@ -12,12 +12,12 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
  */
-class Belvg_Ajaxloader_Block_Front extends Mage_Adminhtml_Block_Template
+class Systemsport_Ajaxloader_Block_Front extends Mage_Adminhtml_Block_Template
 {
-
+    
     public function getCursorLoaderImage()
     {
         return Mage::helper('ajaxloader')->getCursorLoaderImage(); 
@@ -25,8 +25,8 @@ class Belvg_Ajaxloader_Block_Front extends Mage_Adminhtml_Block_Template
     
     public function getOverlaySettings()
     {
-        $helper = Mage::helper('ajaxloader');
-        $color = $helper->getOverlayColor()?('#' . $helper->getOverlayColor()):NULL;
+        $helper  = Mage::helper('ajaxloader');
+        $color   = $helper->getOverlayColor();
         $opacity = (float) $helper->getOverlayOpacity();
         if ($opacity > 1) {
             return 1;
@@ -35,14 +35,14 @@ class Belvg_Ajaxloader_Block_Front extends Mage_Adminhtml_Block_Template
         }
         
         $element = $helper->getOverlayElement();
-        $loader = $helper->getMainLoaderImage();
+        $loader  = $helper->getMainLoaderImage();
         $loaderOpacity = $helper->getMainLoaderOpacity();
          
         return array(
-            'color' => $color,
-            'opacity' => $opacity,
-            'element' => $element,
-            'loader' => $loader,
+            'color'          => $color,
+            'opacity'        => $opacity,
+            'element'        => $element,
+            'loader'         => $loader,
             'loader_opacity' => $loaderOpacity
         );
     }

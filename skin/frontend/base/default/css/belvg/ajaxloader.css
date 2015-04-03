@@ -1,4 +1,3 @@
-<?php
 /*
  * BelVG LLC.
  *
@@ -15,15 +14,21 @@
  * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
  */
-class Belvg_Ajaxloader_Block_Adminhtml_Config_Title extends Mage_Adminhtml_Block_System_Config_Form_Field
-{
-    
-    public function render(Varien_Data_Form_Element_Abstract $element)
-    {
-        $id   = $element->getHtmlId();
-        $html = '<tr id="row_' . $id . '" class="system-fieldset-sub-head">' . '<td colspan="5"><h4>' . $element->getLabel() . '</h4></td></tr>';
-        
-        return $html;
-    }
-    
+#blvg-page-loader {
+    width: 100%;
+    height: 50px;
+    background: url(../../images/belvg/laynav/ajax-loader-bar.gif) no-repeat scroll 50% 50% transparent;
+}
+.prettyLoader {
+    /*background: url(../../images/belvg/laynav/ajax-loader.gif) center center no-repeat #fff;*/
+    background: transparent;
+    height: 33px;
+    position: absolute;
+    width: 33px;
+    z-index: 30000;
+    border-radius: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+}
+.pl_ie6 { 
+    background-image: url(../../images/belvg/laynav/ajax-loader.gif); 
 }

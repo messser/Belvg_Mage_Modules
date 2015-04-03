@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * BelVG LLC.
  *
  * NOTICE OF LICENSE
@@ -12,14 +12,14 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
  */
 class Belvg_Ajaxloader_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
+    
     const MEDIA_FOLDER = 'ajaxloader';
-
+    
     public function isEnabled()
     {
         return Mage::getStoreConfigFlag('ajaxloader/settings/enabled');
@@ -30,14 +30,25 @@ class Belvg_Ajaxloader_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag('ajaxloader/settings/onload');
     }
     
+    public function isCursorLoaderEnabled()
+    {
+        return Mage::getStoreConfigFlag('ajaxloader/settings/cursor_loader_enabled');
+    }
+    
     public function getCursorLoaderImage()
     {
+        if (!$this->isCursorLoaderEnabled()) {
+            return FALSE;
+        }
+        
         return Mage::getBaseUrl('media') . self::MEDIA_FOLDER . DS . Mage::getStoreConfig('ajaxloader/settings/cursor_loader_image');
     }
-
+    
     public function getOverlayColor()
     {
-        return Mage::getStoreConfigFlag('ajaxloader/settings/overlay_enabled')?Mage::getStoreConfig('ajaxloader/settings/overlay_color'):'';
+        $color = Mage::getStoreConfig('ajaxloader/settings/overlay_color');
+        
+        return ($this->isEnabled() && Mage::getStoreConfig('ajaxloader/settings/overlay_enabled')) ? $color : NULL;
     }
     
     public function getOverlayOpacity()
@@ -50,15 +61,20 @@ class Belvg_Ajaxloader_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig('ajaxloader/settings/overlay_element');
     }
     
+    public function isMainLoaderEnabled()
+    {
+        return Mage::getStoreConfigFlag('ajaxloader/settings/main_loader_enabled');
+    }
+    
     public function getMainLoaderImage()
     {
-        if (!Mage::getStoreConfigFlag('ajaxloader/settings/main_loader_enabled')) {
+        if (!$this->isMainLoaderEnabled()) {
             return FALSE;
         }
         
         return Mage::getBaseUrl('media') . self::MEDIA_FOLDER . DS . Mage::getStoreConfig('ajaxloader/settings/main_loader_image');
     }
-   
+    
     public function getMainLoaderOpacity()
     {
         return Mage::getStoreConfig('ajaxloader/settings/main_loader_opacity');

@@ -12,7 +12,7 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
 -->
 <layout version="0.1.0">
@@ -21,12 +21,14 @@
             <action method="addCss"><stylesheet>css/belvg/ajaxloader.css</stylesheet></action>
         </reference>
         <reference name="jquery_head">
-            <action method="addLib" ifconfig="ajaxloader/settings/enabled" ifvalue="1"><libname>jquery</libname></action>
-            <action method="addLib" ifconfig="ajaxloader/settings/enabled" ifvalue="1"><libname>noconflict</libname></action>
-            <action method="addJs" ifconfig="ajaxloader/settings/enabled" ifvalue="1"><script>belvg/ajaxloader/ajaxloader.js</script></action>
+            <action method="addLib" ifconfig="ajaxloader/settings/enabled"><libname>jquery</libname></action>
+            <action method="addLib" ifconfig="ajaxloader/settings/enabled"><libname>noconflict</libname></action>
+            <action method="addJs"  ifconfig="ajaxloader/settings/enabled"><script>belvg/ajaxloader/ajaxloader.js</script></action>
         </reference>
-        <reference name="before_body_end">
-            <block type="ajaxloader/front" name="ajaxloader.block" template="belvg/ajaxloader/block.phtml"/>
+        <reference name="after_body_start">
+            <block type="ajaxloader/front" name="ajaxloader.block">
+                <action method="setTemplate" ifconfig="ajaxloader/settings/enabled"><template>belvg/ajaxloader/block.phtml</template></action>
+            </block>
         </reference>        
     </default>
 </layout>            

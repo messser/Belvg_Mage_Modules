@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * BelVG LLC.
  *
  * NOTICE OF LICENSE
@@ -12,24 +12,23 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
  */
 class Belvg_Ajaxloader_Model_Config_Image extends Mage_Adminhtml_Model_System_Config_Backend_File
 {
-    
     /**
      * Upload max file size in kilobytes
      *
      * @var int
      */
     protected $_maxFileSize = 1024;
-   
+    
     protected function _getAllowedExtensions()
     {
         return array('jpg', 'jpeg', 'gif', 'png');
     }
-   
+    
     /**
      * Save uploaded file before saving config value
      *
@@ -38,7 +37,7 @@ class Belvg_Ajaxloader_Model_Config_Image extends Mage_Adminhtml_Model_System_Co
     protected function _beforeSave()
     {
         $value = $this->getValue();
-        if ($_FILES['groups']['tmp_name'][$this->getGroupId()]['fields'][$this->getField()]['value']) {
+        if ($value && $_FILES['groups']['tmp_name'][$this->getGroupId()]['fields'][$this->getField()]['value']) {
             $uploadDir = $this->_getUploadDir();
             try {
                 $file = array();
@@ -50,6 +49,8 @@ class Belvg_Ajaxloader_Model_Config_Image extends Mage_Adminhtml_Model_System_Co
                 $uploader->setAllowedExtensions($this->_getAllowedExtensions());
                 $uploader->setAllowRenameFiles(TRUE);
                 $uploader->addValidateCallback('size', $this, 'validateMaxSize');
+                
+                $this->createWritableDir(pathinfo($uploadDir, PATHINFO_DIRNAME));
                 $result = $uploader->save($uploadDir);
             } catch (Exception $e) {
                 Mage::throwException($e->getMessage());
@@ -66,10 +67,22 @@ class Belvg_Ajaxloader_Model_Config_Image extends Mage_Adminhtml_Model_System_Co
             }
         } else {
             if (is_array($value) && !empty($value['delete'])) {
-                $this->setValue('');
+                $fieldConfig = $this->getFieldConfig();
+                $this->setValue($fieldConfig->default_value);
             } else {
                 $this->unsValue();
             }
+        }
+        
+        return $this;
+    }
+    
+    public function createWritableDir($path)
+    {
+        $io = new Varien_Io_File();
+        
+        if (!$io->isWriteable($path) && !$io->mkdir($path, 0777, TRUE)) {
+            Mage::throwException(Mage::helper('core')->__("Cannot create writable directory '%s'.", $path));
         }
         
         return $this;
@@ -87,5 +100,4 @@ class Belvg_Ajaxloader_Model_Config_Image extends Mage_Adminhtml_Model_System_Co
             throw Mage::exception('Mage_Core', Mage::helper('adminhtml')->__('Uploaded file is larger than %.2f kilobytes allowed by server', $this->_maxFileSize));
         }
     }
-    
 }

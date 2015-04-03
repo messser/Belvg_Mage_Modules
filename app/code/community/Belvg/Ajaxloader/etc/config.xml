@@ -12,14 +12,14 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
 -->
 <config>
     <modules>
         <Belvg_Ajaxloader>
-            <version>0.9.0</version>
-            <update>04-12-2014</update>
+            <version>0.9.1</version>
+            <update>16-02-2015</update>
             <desc>Stock Version</desc>
         </Belvg_Ajaxloader>
     </modules>
@@ -99,11 +99,11 @@
                 <animation_speed>800</animation_speed>
                 <cursor_loader_enabled>1</cursor_loader_enabled>
                 <cursor_loader_image>default/ajax-loader.gif</cursor_loader_image>
-                <overlay_enabled>1</overlay_enabled>
+                <overlay_enabled>0</overlay_enabled>
                 <overlay_opacity>0.6</overlay_opacity>
                 <overlay_color>ffffff</overlay_color>
                 <overlay_element>.main-container</overlay_element>
-                <main_loader_enabled>1</main_loader_enabled>
+                <main_loader_enabled>0</main_loader_enabled>
                 <main_loader_image>default/loader.gif</main_loader_image>
                 <main_loader_opacity>0.2</main_loader_opacity>
             </settings>

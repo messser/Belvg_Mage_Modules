@@ -1,57 +1,60 @@
 <?php
-/**
- * BelVG LLC.
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the EULA
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
- *
- *******************************************************************
- * @category   Belvg
- * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
- * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
- */
+    $overlay  = (array) $this->getOverlaySettings();
+    $isCursor = Mage::helper('ajaxloader')->isCursorLoaderEnabled();
+    $isMain   = Mage::helper('ajaxloader')->isMainLoaderEnabled();
 ?>
-<?php $overlay = (array) $this->getOverlaySettings(); ?>
 <script>
-Ajaxloader.setOverlaySettings(
-    '<?php echo $overlay['color'] ?>',
-    '<?php echo $overlay['opacity'] ?>',
-    '<?php echo $overlay['element'] ?>',
-    '<?php echo $overlay['loader'] ?>',
-    '<?php echo $overlay['loader_opacity'] ?>'
-);
-Ajaxloader.setAnimationSpeed(<?php echo $this->getAnimationSpeed() ?>);
+    Ajaxloader.setOverlaySettings(
+        '<?php echo $overlay['color'] ?>',
+        '<?php echo $overlay['opacity'] ?>',
+        '<?php echo $overlay['element'] ?>',
+        '<?php echo $overlay['loader'] ?>',
+        '<?php echo $overlay['loader_opacity'] ?>'
+    );
+    Ajaxloader.setAnimationSpeed(<?php echo $this->getAnimationSpeed() ?>);
+        
+    <?php if ($this->isOnload()): ?>
+        jQuery(window).on('beforeunload', function(){
+            Ajaxloader.setOverlayElement('.page');
+            Ajaxloader.activateOverlay();
+            <?php if ($isCursor): ?>
+                Ajaxloader.showCursorLoader();
+            <?php endif ?>
+            <?php if ($isMain): ?>
+                Ajaxloader.showMainLoader();
+            <?php endif ?>
+        });
+    <?php endif ?>
     
-<?php if ($this->isOnload()): ?>
-/*if (!Ajaxloader.disabled) {
-    Ajaxloader.activateOverlay().showCursorLoader();
-};
-jQblvg(document).ready( function(){
-    Ajaxloader.disableOverlay().hideCursorLoader();
-});*/
-jQblvg(window).on('beforeunload', function(){
-    Ajaxloader.setOverlayElement('.page');
-    Ajaxloader.activateOverlay().showCursorLoader().showMainLoader();
-});
-<?php endif; ?>
-
-jQblvg(document).bind('ajaxSend', function(){
     if (!Ajaxloader.disabled) {
-        Ajaxloader.activateOverlay().showCursorLoader().showMainLoader();
+        jQuery(document).bind('ajaxStart', function() {
+            Ajaxloader.activateOverlay();
+            <?php if ($isCursor): ?>
+                Ajaxloader.showCursorLoader();
+            <?php endif ?>
+            <?php if ($isMain): ?>
+                Ajaxloader.showMainLoader();
+            <?php endif ?>
+        });
+        
+        jQuery(document).bind('ajaxStop', function() {
+            Ajaxloader.disableOverlay();
+            <?php if ($isCursor): ?>
+                Ajaxloader.hideCursorLoader();
+            <?php endif ?>
+            <?php if ($isMain): ?>
+                Ajaxloader.hideMainLoader();
+            <?php endif ?>
+        });
     }
-}).bind('ajaxComplete', function(){
-   Ajaxloader.disableOverlay().hideCursorLoader().hideMainLoader();
-});
-        
-        
 </script>
-<style>
-.prettyLoader {
-    background: url('<?php echo $this->getCursorLoaderImage() ?>') center center no-repeat #ffffff;
-}
-</style>
+<?php if ($isCursor): ?>
+    <script>
+        jQuery.prettyLoader();
+    </script>
+    <style>
+        .prettyLoader {
+            background: url('<?php echo $this->getCursorLoaderImage() ?>') center center no-repeat #ffffff;
+        }
+    </style>
+<?php endif ?>

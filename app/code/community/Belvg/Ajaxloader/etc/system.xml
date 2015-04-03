@@ -12,7 +12,7 @@
  *******************************************************************
  * @category   Belvg
  * @package    Belvg_Ajaxloader
- * @copyright  Copyright (c) 2010 - 2013 BelVG LLC. (http://www.belvg.com)
+ * @copyright  Copyright (c) 2010 - 2015 BelVG LLC. (http://www.belvg.com)
  * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
 -->
 <config>
@@ -101,9 +101,6 @@
                             <comments></comments>
                             <validate>validate-number validate-digits-range digits-range-1-5000 required-entry</validate>
                         </animation_speed>
-                        
-                        
-                        
                         <title_cursor translate="label" module="ajaxloader">
                             <label>Cursor Loader</label>
                             <frontend_type>text</frontend_type>
@@ -127,6 +124,7 @@
                             <label>Loader Image</label>
                             <frontend_type>image</frontend_type>
                             <backend_model>Belvg_Ajaxloader_Model_Config_Image</backend_model>
+                            <default_value>default/ajax-loader.gif</default_value>
                             <upload_dir config="system/filesystem/media" scope_info="1">ajaxloader</upload_dir>
                             <base_url type="media" scope_info="1">ajaxloader</base_url>
                             <sort_order>22</sort_order>
@@ -193,7 +191,6 @@
                                 <overlay_enabled>1</overlay_enabled>
                             </depends>
                         </overlay_element>
-                        
                         <title_main_loader translate="label" module="ajaxloader">
                             <label>Main Loader</label>
                             <frontend_type>text</frontend_type>
@@ -217,6 +214,7 @@
                             <label>Loader Image</label>
                             <frontend_type>image</frontend_type>
                             <backend_model>Belvg_Ajaxloader_Model_Config_Image</backend_model>
+                            <default_value>default/loader.gif</default_value>
                             <upload_dir config="system/filesystem/media" scope_info="1">ajaxloader</upload_dir>
                             <base_url type="media" scope_info="1">ajaxloader</base_url>
                             <sort_order>52</sort_order>
@@ -240,9 +238,6 @@
                                 <overlay_enabled>1</overlay_enabled>
                             </depends>
                         </main_loader_opacity>
-                        
-                        
-                        
                     </fields>
                 </settings>
             </groups>
