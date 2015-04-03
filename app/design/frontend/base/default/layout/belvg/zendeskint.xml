@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ *******************************************************************
+ * @category   Belvg
+ * @package    Belvg_Zendeskint
+ * @version    1.0.0
+ * @copyright  Copyright (c) 2010 - 2012 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ -->
+<layout version="0.1.0">
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="zendeskint">
+               <name>zendesk</name>
+               <path>zendeskint/account</path>
+               <label>My Zendesk Account</label>
+            </action>
+        </reference>
+    </customer_account>
+    <zendeskint_account_index> 
+        <update handle="customer_account"/>
+        <reference name="root">   
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>   
+        </reference>
+        <reference name="content">
+            <block type="zendeskint/account" name="zendesk_account" template="belvg/zendeskint/account.phtml" />
+        </reference>		
+    </zendeskint_account_index>
+    <zendeskint_account_zendesksso>
+        <update handle="customer_account"/>
+        <reference name="root">   
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>   
+        </reference>
+        <reference name="content">
+            <block type="zendeskint/account" name="zendesk_account" template="belvg/zendeskint/sso.phtml" />
+        </reference>
+    </zendeskint_account_zendesksso>
+</layout>

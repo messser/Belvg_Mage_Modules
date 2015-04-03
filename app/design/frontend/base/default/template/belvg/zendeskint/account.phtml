@@ -1,0 +1,78 @@
+<?php $this->init() ?>
+<?php $user = $this->getZendeskUser() ?>
+<div class="my-account">
+    <div class="dashboard">
+        <div class="page-title">
+            <h1><?php echo $this->__('My Zendesk Account') ?></h1>
+        </div>
+        <div class="box-account box-info">
+            <div class="box-head">
+                <h2><?php echo $this->__('Account Information') ?></h2>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img width="42" style="margin-right:10px" src="<?php echo $user['photo_url'] ?>"/>
+                        </td>
+                        <td>
+                            <div class="box">
+                                <div class="box-title">
+                                    <h3><?php echo $user['name'] ?></h3>
+                                </div>
+                                <span><?php echo $user['email'] ?></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <?php $tickets = (array)$this->getTickets() ?>
+        <div class="box-account box-recent">
+            <div class="box-head">
+                <h2><?php echo $this->__('Current Tickets') ?></h2>
+            </div>
+            <table class="tickets data-table">
+                <colgroup>
+                    <col class="nice_id">
+                    <col class="subject">
+                    <col class="created">
+                    <col class="updated">
+                    <col class="status">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="nice_id">ID</th>
+                        <th class="subject">Subject</th>
+                        <th class="created">Requested</th>
+                        <th class="updated">Updated</th>
+                        <th class="status">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tickets['tickets'] as $ticket): $ticket = (array)$ticket; ?>
+                    <tr class="linked">
+                        <td class="nice_id"><?php echo $ticket['id'] ?></td>
+                        <td class="subject"><span><?php echo $ticket['subject'] ?></span></td>
+                        <td class="created"><?php echo Mage::helper('core')->formatDate($ticket['created_at'], 'short', TRUE) ?></td>
+                        <td class="updated"><?php echo Mage::helper('core')->formatDate($ticket['updated_at'], 'short', TRUE) ?></td>
+                        <td class="status"><?php echo $this->__($ticket['status']) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                    <?php if (!sizeof($tickets['tickets'])): ?>
+                    <tr>
+                        <td colspan="5" style="text-align: center;"><?php echo $this->__('There are no current tickets') ?></td>
+                    </tr>        
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="buttons-set">
+            <button class="button" title="<?php echo $this->__('Open My Zendesk Account') ?>" type="submit" onclick="window.open('<?php echo $this->getUrl('zendeskint/account/sso') ?>');">
+                <span>
+                    <span><?php echo $this->__('Open My Zendesk Account') ?></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ *******************************************************************
+ * @category   Belvg
+ * @package    Belvg_Zendeskint
+ * @version    1.0.0
+ * @copyright  Copyright (c) 2010 - 2012 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+ -->
+<config>
+    <modules>
+        <Belvg_Zendeskint>
+            <version>0.9.0</version>
+        </Belvg_Zendeskint>
+    </modules>
+    <frontend>
+        <routers>
+            <zendeskint>
+                <use>standard</use>
+                <args>
+                    <module>Belvg_Zendeskint</module>
+                    <frontName>zendeskint</frontName>
+                </args>
+            </zendeskint>
+        </routers>
+        <translate>
+            <modules>
+                <Belvg_Zendeskint>
+                    <files>
+                        <default>Belvg_Zendeskint.csv</default>
+                    </files>
+                </Belvg_Zendeskint>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <zendeskint>
+                    <file>belvg/zendeskint.xml</file>
+                </zendeskint>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Belvg_Zendeskint>
+                    <files>
+                        <default>Belvg_Zendeskint.csv</default>
+                    </files>
+                </Belvg_Zendeskint>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <zendeskint>
+                    <file>belvg/zendeskint.xml</file>
+                </zendeskint>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+            <zendeskint>
+                <class>Belvg_Zendeskint_Model</class>
+            </zendeskint>
+        </models>
+        <blocks>
+            <zendeskint>
+                <class>Belvg_Zendeskint_Block</class>
+            </zendeskint>
+        </blocks>
+        <helpers>
+            <zendeskint>
+                <class>Belvg_Zendeskint_Helper</class>
+            </zendeskint>
+        </helpers>
+    </global>
+</config>
