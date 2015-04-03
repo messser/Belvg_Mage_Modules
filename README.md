@@ -1,2 +1,0 @@
-# Belvg_Mage_Modules
-Belvg_Mage_Modules
