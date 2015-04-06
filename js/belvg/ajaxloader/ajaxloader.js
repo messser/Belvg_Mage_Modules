@@ -162,22 +162,22 @@ var Ajaxloader = {
     },
     showCursorLoader : function()
     {
-        jQuery.prettyLoader.show();
+        jQblvg.prettyLoader.show();
         
         return this;
     },
     hideCursorLoader : function()
     {
-        jQuery.prettyLoader.hide();
+        jQblvg.prettyLoader.hide();
         
         return this;
     },
     activateOverlay : function()
     {
         if (this.overlayColor) {
-            var element = jQuery(this.overlayElement);
+            var element = jQblvg(this.overlayElement);
             element.append('<div class="belvg-main-overlay"></div>');
-            var overlay = jQuery('.belvg-main-overlay');
+            var overlay = jQblvg('.belvg-main-overlay');
             overlay.css({
                 'position'  : 'absolute',
                 'opacity'   : 0,
@@ -194,7 +194,7 @@ var Ajaxloader = {
     },
     disableOverlay : function()
     {
-        var overlay = jQuery('.belvg-main-overlay');
+        var overlay = jQblvg('.belvg-main-overlay');
         overlay.stop().animate({'opacity':0}, this.animationSpeed, function() {
             overlay.remove();
         });
@@ -204,15 +204,15 @@ var Ajaxloader = {
     showMainLoader : function()
     {
         if (this.overlayLoader) {
-            jQuery('body').append('<div class="belvg-main-loader"></div>');
+            jQblvg('body').append('<div class="belvg-main-loader"></div>');
             background = 'url('+this.overlayLoader+') center center no-repeat transparent';
-            jQuery('.belvg-main-loader').css({
+            jQblvg('.belvg-main-loader').css({
                 'position':'fixed',
                 'opacity':0,
                 'z-index':29999,
                 'background': background,
-                'width': jQuery(window).outerWidth(true)+'px',
-                'height': jQuery(window).outerHeight(true)+'px',
+                'width': jQblvg(window).outerWidth(true)+'px',
+                'height': jQblvg(window).outerHeight(true)+'px',
                 'left': '0',
                 'top': '0'
             }).stop().animate({'opacity':this.overlayLoaderOpacity}, this.animationSpeed);
@@ -222,8 +222,8 @@ var Ajaxloader = {
     },
     hideMainLoader : function()
     {
-        jQuery('.belvg-main-loader').stop().animate({'opacity':0}, this.animationSpeed, function() {
-            jQuery('.belvg-main-loader').remove();
+        jQblvg('.belvg-main-loader').stop().animate({'opacity':0}, this.animationSpeed, function() {
+            jQblvg('.belvg-main-loader').remove();
         });
         
         return this;

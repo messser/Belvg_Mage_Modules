@@ -14,7 +14,7 @@
     Ajaxloader.setAnimationSpeed(<?php echo $this->getAnimationSpeed() ?>);
         
     <?php if ($this->isOnload()): ?>
-        jQuery(window).on('beforeunload', function(){
+        jQblvg(window).on('beforeunload', function(){
             Ajaxloader.setOverlayElement('.page');
             Ajaxloader.activateOverlay();
             <?php if ($isCursor): ?>
@@ -27,7 +27,7 @@
     <?php endif ?>
     
     if (!Ajaxloader.disabled) {
-        jQuery(document).bind('ajaxStart', function() {
+        jQblvg(document).bind('ajaxStart', function() {
             Ajaxloader.activateOverlay();
             <?php if ($isCursor): ?>
                 Ajaxloader.showCursorLoader();
@@ -37,7 +37,7 @@
             <?php endif ?>
         });
         
-        jQuery(document).bind('ajaxStop', function() {
+        jQblvg(document).bind('ajaxStop', function() {
             Ajaxloader.disableOverlay();
             <?php if ($isCursor): ?>
                 Ajaxloader.hideCursorLoader();
@@ -50,7 +50,7 @@
 </script>
 <?php if ($isCursor): ?>
     <script>
-        jQuery.prettyLoader();
+        jQblvg.prettyLoader();
     </script>
     <style>
         .prettyLoader {
