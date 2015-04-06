@@ -18,7 +18,7 @@
 <config>
     <modules>
         <Belvg_Ajaxloader>
-            <version>0.9.1</version>
+            <version>0.9.2</version>
             <update>16-02-2015</update>
             <desc>Stock Version</desc>
         </Belvg_Ajaxloader>
